@@ -14,7 +14,12 @@ class CustomerController extends Controller
         $this->validateInfo($request->all())->validate();
         $customer = $this->saveInfo($request->all());
 
-        return response()->redirectToRoute('step-2');//view('step-2', ['customer'=>$customer, 'currentRoute'=> Route::currentRouteName()]);
+        if ($request->session()->exists('customer'))
+            $request->session()->remove('customer');
+
+        $request->session()->push('customer', $customer->toArray());
+
+        return response()->redirectToRoute('step-2');
     }
 
     protected function validateInfo(array $data)

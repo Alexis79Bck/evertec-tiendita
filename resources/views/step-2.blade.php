@@ -33,10 +33,10 @@
 
             <div class="card-footer ">
 
-                <a href="" class="mb-3 btn btn-success float-end" role="button"> Proceed </a>
+                <a href="{{ route('step-3') }}" class="mb-3 btn btn-success float-end" role="button"> Proceed </a>
 
             </div>
-        </form>
+
     </div>
 
 @endsection

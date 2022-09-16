@@ -12,7 +12,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle  fw-bold {{ Route::currentRouteName() == 'newOrder' ? 'text-primary bg-light' : 'text-light'}}" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle  fw-bold {{ Route::currentRouteName() != 'home' ? 'text-primary bg-light' : 'text-light'}}" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Orders
                     </a>

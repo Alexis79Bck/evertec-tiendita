@@ -19,4 +19,5 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [PageController::class,'index'])->name('home');
 Route::get('/new-order', [OrderController::class, 'newOrder'])->name('newOrder');
 Route::get('/detail-order', [OrderController::class, 'detailOrder'])->name('step-2');
+Route::get('/proceed-order', [OrderController::class, 'proceedOrder'])->name('step-3');
 Route::post('/customer', [CustomerController::class, 'register'])->name('register');
