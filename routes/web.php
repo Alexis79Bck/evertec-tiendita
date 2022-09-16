@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PageController::class,'index'])->name('home');
+Route::get('/new-order', [OrderController::class, 'newOrder'])->name('newOrder');
+Route::get('/detail-order', [OrderController::class, 'detailOrder'])->name('step-2');
+Route::post('/customer', [CustomerController::class, 'register'])->name('register');
