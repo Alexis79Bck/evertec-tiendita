@@ -1,13 +1,10 @@
 @extends('layouts.app')
 
-@section('page-title')
-<span class="display-6 text-primary mt-0 g-0 text-center bg-light fw-bolder">
-    ORDER REQUEST
+@section('content')
+<span class="d-flex justify-content-center display-6 text-primary mt-0 g-0 bg-light fw-bolder">
+    NEW ORDER
 </span>
-@endsection
-
-@section('form-content-step')
-<div class="card mx-auto" style="width: 28rem;">
+<div class="card mx-auto" style="width: 44rem;">
 
     <div class="card-header text-bg-secondary text-center">
         <span class="h3  mt-0  fw-bolder"> Step 3 </span>
@@ -35,7 +32,7 @@
     </div>
 
 
-    
+
 </div>
 
 @endsection

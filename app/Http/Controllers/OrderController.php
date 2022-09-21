@@ -2,33 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ApiPtPServices;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use App\Models\Order;
-
+use App\Models\Customer;
+use App\Factories\OrderFactory;
+use App\Factories\CustomerFactory;
 class OrderController extends Controller
 {
-    public function newOrder()
+
+    public function index()
     {
-        return view('step-1');
+        $orders = (new OrderFactory)->listAllOrders();
+        return view('orders.index', compact('orders'));
+    }
+    public function create()
+    {
+        $imageURL = $this->getImageURL();
+        return view('orders.step-1', compact('imageURL'));
     }
 
-    public function detailOrder()
+    public function accept(Request $request)
     {
+        $customer = (new CustomerFactory)->saveCustomer($request);
+        $order = (new OrderFactory)->newOrder($customer);
+        $imageURL = $this->getImageURL();
 
-        return view('step-2');
+        //return view('orders.step-2', compact('customer','order','imageURL'));
+        return response()->redirectToRoute('detail')->with('customer',$customer)->with('order',$order)->with('imageURL', $imageURL);
+    }
+    public function detail(Request $request)
+    {
+        dd($request);
+        return view('orders.step-2', compact('customer', 'order', 'imageURL'));
     }
 
-    public function proceedOrder()
+    public function proceed(Request $request)
     {
-        $customer = session('customer');
+        dd($request);
+    }
 
-        $order = new Order;
-        $order->status = 'CREATED';
-        $order->customer_id = $customer[0]['id'];
-        $order->save();
-        
-        dd($customer,$order->toArray());
-        return view('step-3');
+    private function getImageURL()
+    {
+        return 'https://api.lorem.space/image/' . $this->getCategory() . '?w=200&h=200';
+    }
+
+    private function getCategory()
+    {
+        $category = ['shoes', 'watch', 'book', 'burger'];
+        $productImg = array_rand($category, 1);
+
+        return $category[$productImg];
     }
 }

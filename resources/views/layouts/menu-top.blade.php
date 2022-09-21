@@ -11,16 +11,8 @@
                     <a class="nav-link text-link  fw-bold {{ Route::currentRouteName() == 'home' ? 'text-primary bg-light' : 'text-light'}}" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle  fw-bold {{ Route::currentRouteName() != 'home' ? 'text-primary bg-light' : 'text-light'}}" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Orders
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('newOrder') }}">New</a></li>
-                        <li><hr class="dropdown-divider"> </li>
-                        <li><a class="dropdown-item" href="#">List</a></li>
-                    </ul>
+                <li class="nav-item ">
+                    <a class="nav-link text-link  fw-bold {{ Route::currentRouteName() == 'orders' ? 'text-primary bg-light' : 'text-light'}}" aria-current="page"href="{{ route('orders') }}">Orders </a>
                 </li>
 
             </ul>

@@ -10,7 +10,14 @@
             </div>
 
             <div class="card-body">
-                <h4 class="card-title fs-3 text-center">Reto Técnico para Desarrollador Laravel </h4>
+                <x-new-order-button /><br>
+                <x-order-search-button />
+
+                @forelse ($orders as $order)
+                    <x-order-card :order="$order" />
+                @empty
+                    <span> There is not orders registered.</span>
+                @endforelse
 
             </div>
         </div>
