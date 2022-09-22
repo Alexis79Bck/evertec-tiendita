@@ -18,11 +18,41 @@ class OrderFactory
         return $order;
     }
 
-    public function listAllOrders()
+    public static function listAllOrders()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(25);
 
         return $orders;
+    }
+
+    public static function getOrder($id)
+    {
+        return Order::find($id);
+    }
+
+    public static function selectStatus(string $status)
+    {
+        switch ($status) {
+            case 'APPROVED':
+                return 'PAYED';
+            case 'PENDING':
+                return 'PENDING';
+            case 'REJECTED':
+                return 'REJECTED';
+            default:
+                return 'CREATED';
+
+        }
+    }
+
+    public static function searchOrdersByCostumerName(string $name)
+    {
+
+    }
+
+    public static function searchOrderById(int $id)
+    {
+
     }
 
 }

@@ -7,21 +7,23 @@ use Illuminate\View\Component;
 class OrderStatusMessage extends Component
 {
     public $status;
+    public $orderId;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($status)
+    public function __construct($status, $id)
     {
         $this->status = $status;
+        $this->orderId = $id;
     }
 
     public function classType()
     {
-        
+
          switch ($this->status) {
-            case 'CREATED':
+            case 'PENDING':
                 return 'warning';
 
             case 'PAYED':

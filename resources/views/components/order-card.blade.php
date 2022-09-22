@@ -8,7 +8,7 @@
                 </a>
             </span>
             <div class="collapse" id="orderMessage-{{$OrderId}}"">
-                <x-order-status-message :status="$OrderStatus" />
+                <x-order-status-message :status="$OrderStatus" :id="$OrderId" />
             </div>
         </div>
         <div class="row p-0 g-2">

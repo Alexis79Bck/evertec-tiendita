@@ -9,7 +9,7 @@ use App\Interfaces\CustomerInterface;
 
 class CustomerFactory
 {
-   
+
     public function saveCustomer(Request $request)
     {
         $this->validateInfo($request->all())->validate();
@@ -31,6 +31,8 @@ class CustomerFactory
             'mobile' => 'required|string|max:20',
         ]);
     }
+
+    
 
 
 }

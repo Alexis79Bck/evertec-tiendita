@@ -29,7 +29,7 @@ class OrderCard extends Component
         $this->CustomerPhone = $order->customer->mobile;
         switch ($order->status)
         {
-            case 'CREATED':
+            case 'PENDING':
                 $this->borderColor = 'border-warning';
                 break;
             case 'PAYED':

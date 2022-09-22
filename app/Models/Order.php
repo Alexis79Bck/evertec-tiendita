@@ -17,4 +17,9 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function scopeOrdersByCustomerName($query, $id)
+    {
+        return $query->where('customer_id', '>', $id);
+    }
 }

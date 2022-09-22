@@ -19,8 +19,7 @@ Route::get('/', [PageController::class,'index'])->name('home');
 Route::controller(OrderController::class)->group(function () {
     Route::get('/orders', 'index')->name('orders');
     Route::get('/order/new-order', 'create')->name('create');
-    Route::post('/order/new-order', 'accept')->name('accept');
-    Route::get('/order/detail-order', 'detail')->name('detail');
-    Route::get('/order/proceed-order', 'proceed')->name('proceed');
+    Route::post('/order/new-order/accept', 'accept')->name('accept');
+    Route::get('/order/processed-order/{orderId}', 'processed')->name('processed');
 });
 
