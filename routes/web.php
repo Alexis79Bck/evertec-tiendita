@@ -21,5 +21,6 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/order/new-order', 'create')->name('create');
     Route::post('/order/new-order/accept', 'accept')->name('accept');
     Route::get('/order/processed-order/{orderId}', 'processed')->name('processed');
+    Route::get('/order/retry-order/{orderId}', 'retry')->name('retry');
 });
 

@@ -53,7 +53,6 @@ class ApiPtPServices
 
         $endPoint = self::$URLBase.'/api/session/';
         $returnUrl = route('processed', $request->orderId);
-       // dd($returnUrl);
         $credentials = self::createCredentials();
 
         $response = HTTP::post($endPoint, [
@@ -66,6 +65,8 @@ class ApiPtPServices
                     'total' => $request->cost
                 ]
             ],
+            'skipResult' => true,
+            'paymentMethod' => 'visa, master, amex, diners, discover, visa_electron',
             'expiration' => date('c', strtotime('+1 hour')),
             'returnUrl' => $returnUrl,
             'ipAddress' => '127.0.0.1',
@@ -90,5 +91,33 @@ class ApiPtPServices
 
         return $response->json();
 
+    }
+
+    public static function notifyChangeStatus(Request $request)
+    {
+        self::initAPI();
+
+        $endPoint = self::$URLBase . '/api/notify';
+        $returnUrl = route('processed', $request->orderId);
+        $credentials = self::createCredentials();
+
+        $response = HTTP::post($endPoint, [
+            'auth' => $credentials,
+            'payment' => [
+                'reference' => $request->orderId,
+                'description' => $request->product . ' cost $' . $request->cost,
+                'amount' => [
+                    'currency' => 'USD',
+                    'total' => $request->cost
+                ]
+            ],
+            'paymentMethod' => 'visa, master, amex, diners, discover, visa_electron, BBVAC',
+            'expiration' => date('c', strtotime('+1 hour')),
+            'returnUrl' => $returnUrl,
+            'ipAddress' => '127.0.0.1',
+            'userAgent' => $request->server('HTTP_USER_AGENT')
+        ]);
+
+        return $response->json();
     }
 }

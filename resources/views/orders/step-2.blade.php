@@ -8,6 +8,7 @@
 
                 <div class="card-header text-secondary text-center">
                     <span class="h3  mt-0  fw-bolder shadow"> ORDER #{{ $order->id }} - <b class="{{ $order->status == 'PAYED' ? 'text-success' : '' }} {{ $order->status == 'PENDING' ? 'text-warning' : '' }} {{ $order->status == 'REJECTED' ? 'text-danger' : '' }} "> {{ $order->status }} </b> </span>
+                    <p class="w-50 mx-auto justify-content-center alert {{ $order->status == 'PAYED' ? 'alert-success' : '' }} {{ $order->status == 'PENDING' ? 'alert-warning' : '' }} {{ $order->status == 'REJECTED' ? 'alert-danger' : '' }} bg-opacity-50 d-flex align-items-center"><small class="fs-6 font-monospace">{{ $message }}</small></p>
                 </div>
                 <div class="card-body">
 
@@ -27,7 +28,11 @@
 
                 </div>
                 <div class="card-footer">
-
+                    @if ($order->status == 'PAYED')
+                        <x-finish-button />
+                    @else
+                        <x-retry-button :orderId="$order->id"/>
+                    @endif
                 </div>
 
 

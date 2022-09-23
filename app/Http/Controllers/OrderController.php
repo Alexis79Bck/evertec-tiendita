@@ -43,10 +43,12 @@ class OrderController extends Controller
      */
     public function accept(Request $request)
     {
+
         $customer = (new CustomerFactory)->saveCustomer($request);
         $order = (new OrderFactory)->newOrder($customer);
         $request->request->add(['status' => 'CREATED', 'product' => 'Product X', 'cost' => 125, 'orderId' => $order->id]);
         $response = ApiPtPServices::createApiRequest($request);
+        //dd($response);
         if ($response['status']['status'] == 'OK') {
             $order->requestId = $response['requestId'];
             $order->processURL = $response['processUrl'];
@@ -74,6 +76,35 @@ class OrderController extends Controller
         $imageURL = $this->getImageURL();
         return response()->view('orders.step-2', compact('order','imageURL','message'));
 
+    }
+
+    public function retry(Request $request, $orderId)
+    {
+
+        $order = OrderFactory::getOrder($orderId);
+        //$requestInfo =  ApiPtPServices::getRequestInfo($order->requestId);
+        //
+        $request->merge([
+            'name' => $order->customer->name,
+            'email'=> $order->customer->email,
+            'mobile' => $order->customer->mobile,
+            'status' => 'CREATED',
+            'product' => 'Product X',
+            'cost' => 125,
+            'orderId' => $orderId,
+            'internalReference' => (int)$order->requestId
+        ]);
+
+        dd($request);
+        $response = ApiPtPServices::createApiRequest($request);
+        if ($response['status']['status'] == 'OK') {
+            $order->requestId = $response['requestId'];
+            $order->processURL = $response['processUrl'];
+            $order->save();
+            return redirect()->away($response['processUrl']);
+        } else {
+            return $response['status']['message'];
+        }
     }
     /**
      * Método getImageURL
