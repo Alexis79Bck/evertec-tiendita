@@ -10,8 +10,7 @@
             </div>
 
             <div class="card-body">
-                <x-new-order-button /><br>
-                <x-order-search-button />
+                <x-new-order-button />
 
                 @forelse ($orders as $order)
                     <x-order-card :order="$order" />

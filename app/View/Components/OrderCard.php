@@ -7,6 +7,17 @@ use Illuminate\View\Component;
 
 class OrderCard extends Component
 {
+    /**
+     * Properties
+     * @var mixed $CustomerId
+     * @var mixed $CustomerName
+     * @var mixed $CustomerEmail
+     * @var mixed $CustomerPhone
+     * @var mixed $OrderId
+     * @var mixed $OrderStatus
+     * @var mixed $borderColor
+     *
+     */
     public $CustomerId;
     public $CustomerName;
     public $CustomerEmail;
@@ -14,10 +25,11 @@ class OrderCard extends Component
     public $OrderId;
     public $OrderStatus;
     public $borderColor;
+
     /**
-     * Create a new component instance.
-     *
-     * @return void
+     * Crea una nueva instancia del componente.
+     * @param mixed $order
+     @return void
      */
     public function __construct($order)
     {
