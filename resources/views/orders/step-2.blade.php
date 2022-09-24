@@ -28,11 +28,8 @@
 
                 </div>
                 <div class="card-footer">
-                    @if ($order->status == 'PAYED')
-                        <x-finish-button />
-                    @else
-                        <x-retry-button :orderId="$order->id"/>
-                    @endif
+                    <x-finish-button />
+                    
                 </div>
 
 
